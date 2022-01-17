@@ -1,5 +1,5 @@
 var buttonEl = document.querySelector("#save-task");
-console.log(buttonEl);var tasksToDoEl = document.querySelector("#tasks-to-do");
+var tasksToDoEl = document.querySelector("#tasks-to-do");
 
 
     var createTaskHandler = function() {
