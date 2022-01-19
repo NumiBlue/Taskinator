@@ -93,11 +93,13 @@ var taskButtonHandler = function(event) {
   //get target element
   var targetEl = event.target;
 
+
   if (event.target.matches(".delete-btn")) {
     // get the element's task id
     var taskId = event.target.getAttribute("data-task-id");
     console.log(taskId);
     deleteTask(taskId);
+  }
 };
 
 var deleteTask = function(taskId) {
@@ -107,4 +109,4 @@ var deleteTask = function(taskId) {
 
 
 
-pageContentEl.addEventListener("click", taskButtonHandler)};
+pageContentEl.addEventListener("click", taskButtonHandler);
