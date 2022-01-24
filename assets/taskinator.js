@@ -30,7 +30,17 @@ console.log(taskType);
 if (isEdit) {
   var taskId = formEl.getAttribute("data-task-id");
   completeEditTask(taskNameInput, taskTypeInput, taskId);
-} 
+} else {
+  var taskDataObj = {
+    name: taskNameInput,
+    type: taskTypeInput,
+    status: "to do"
+  };
+
+  createTaskEl(taskDataObj);
+ }
+};
+
 
 formEl.setAttribute("data-task-id")
 ;
@@ -54,11 +64,15 @@ var taskButtonHandler = function(event) {
 };
 
 // get task list item element
-var taskSelected = document.querySelector(
-  ".task-item[data-task-id='" + taskId + "']"
-  );
+taskSelected.querySelector("h3.task-name").textContent = taskName;
+taskSelected.querySelector("span.task-type").textContent = taskType;
 
-  / get content from task name and type
+alert("Task Updated!");
+
+formEl.removeAttribute("data-tas-id");
+document.querySelector("#save-task").textContent = "Add Task";
+
+  // get content from task name and type
 var taskName = taskSelected.querySelector("h3.task-name").textContent;
 console.log(taskName);
 
@@ -78,18 +92,18 @@ var deleteTask = function(taskId) {
   var taskSelected = document.querySelector(
     ".task-item[data-task-id='" + taskId + "']");
   taskSelected.remove();
-  }
-};
+  };
 
-// no data attribute, so create object as normal and pass to createTaskEl function
-else {
+  var taskId = formEl.getAttribute("data-task-id");
+  completeEditTask(taskNameInput, taskTypeInput, taskId);
+
   var taskDataObj = {
     name: taskNameInput,
     type: taskTypeInput
   };
 
   createTaskEl(taskDataObj);
-}
+
 
   //package up data as an object
   var taskDataObj = {
@@ -99,7 +113,7 @@ else {
 
   //send it as an argument to createTaskEl
   createTaskEl(taskDataObj);
-};
+
 var createTaskActions= function(taskId) {
 var actionContainerEl = document.createElement("div");
 actionContainerEl.className = "task-actions";
@@ -199,10 +213,3 @@ console.log(taskType);
 // write values of taskName and taskType to form to be edited
 document.querySelector("input[name='task-name']").value = taskName;
 document.querySelector("select[name='task-type']").value = taskType;
-
-
-document.querySelector("#save-task").textContent = "Save Task";
-
-
-// for edit and delete buttons
-pageContentEl.addEventListener("click", taskButtonHandler);
