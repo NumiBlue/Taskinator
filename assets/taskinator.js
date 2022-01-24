@@ -47,7 +47,7 @@ if (isEdit) {
 };
 
 
-formEl.setAttribute("data-task-id")
+formEl.setAttribute("data-task-id", taskId)
 ;
 
 
@@ -115,9 +115,10 @@ var deleteTask = function(taskId) {
   console.log(taskId);
   //find task list element with taskId value and remove it
   var taskSelected = document.querySelector(
-    ".task-item[data-task-id='" + taskId + "']");
+    ".task-item[data-task-id='" + taskId + "']"
+    );
   taskSelected.remove();
-  };
+ 
 
   var taskId = formEl.getAttribute("data-task-id");
   completeEditTask(taskNameInput, taskTypeInput, taskId);
@@ -239,4 +240,19 @@ console.log(taskType);
 document.querySelector("input[name='task-name']").value = taskName;
 document.querySelector("select[name='task-type']").value = taskType;
 
+ // set data attribute to the form with a value of the task's id so it knows which one is being edited
+ formEl.setAttribute("data-task-id", taskId);
+ // update form's button to reflect editing a task rather than creating a new one
+ formEl.querySelector("#save-task").textContent = "Save Task";
+};
+
+// Create a new task
+formEl.addEventListener("submit", taskFormHandler);
+
+// for edit and delete buttons
+pageContentEl.addEventListener("click", taskButtonHandler);
+
+// for changing the status
 pageContentEl.addEventListener("change", taskStatusChangeHandler);
+
+loadTasks();
